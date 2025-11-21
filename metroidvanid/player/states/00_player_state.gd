@@ -5,7 +5,9 @@ var player : Player
 var next_state : PlayState
 
 #region ///所有其他状态的索引
-
+#使用唯一标识方便访问
+@onready var idle: PlayStateIdle = %Idle
+@onready var run: PlayStateRun = %Run
 #endregion
 
 #状态初始化函数

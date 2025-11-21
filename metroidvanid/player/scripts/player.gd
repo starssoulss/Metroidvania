@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+@export var move_speed : float = 150
 
 #region ///状态机变量
 var states : Array[ PlayState ] #状态数组，初始获得所有，后续只保留当前及上一个状态
@@ -65,7 +66,9 @@ func initialize_states() -> void:
 		
 	#设置第一个状态，本例中为Idle
 	change_state( current_state )
-	
+	current_state.enter()
+	$Label.text = current_state.name
+
 	pass
 	
 #状态变更函数
@@ -85,17 +88,21 @@ func change_state( new_state : PlayState ) -> void:
 		pass
 	
 	#将新状态置入状态数组首项
-	states.append( new_state )
+	states.push_front( new_state )
 	#进入当前状态
 	current_state.enter()
 	#保持状态数组只有3个项
 	states.resize( 3 )
+	$Label.text = current_state.name
 	pass
 	
+#方向更新函数
 func update_direction() -> void:
 	#var prev_direction : Vector2 = direction
 	
 	#根据输入获得新的方向
-	direction = Input.get_vector( "left", "right", "up", "down" )
+	var x_axis = Input.get_axis("left", "right")
+	var y_axis = Input.get_axis("down", "up")
+	direction = Vector2(x_axis, y_axis)
 	
 	pass
