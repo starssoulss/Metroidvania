@@ -10,6 +10,7 @@ var next_state : PlayState
 @onready var run: PlayStateRun = %Run
 @onready var jump: PlayStateJump = %Jump
 @onready var fall: PlayStateFall = %Fall
+
 #endregion
 
 #状态初始化函数

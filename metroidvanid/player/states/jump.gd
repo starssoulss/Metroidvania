@@ -12,7 +12,7 @@ func enter() -> void:
 	#播放动画
 	
 	#施加跳跃速度
-	player.velocity.y -= jump_velocity
+	player.velocity.y = -jump_velocity
 	
 	#指示器，测试用
 	player.add_debug_indicator( Color.CHARTREUSE )

@@ -20,6 +20,7 @@ var previous_state : PlayState : #上一个玩家状态
 #region ///常量
 var direction : Vector2 = Vector2.ZERO #方向，二维向量
 var gravity : float = 980 #重力，自己定义合适的量
+var gravity_mulitplier : float = 1.0 #重力系数，用于调整坠落感
 #endregion
 
 #初始化函数
@@ -42,8 +43,8 @@ func _process( _delta: float) -> void:
 
 func _physics_process( _delta: float) -> void:
 	#施加重力，计算重力在_delta时间内对于y分量的影响
-	velocity.y += gravity * _delta
-		#添加移动滑动功能
+	velocity.y += gravity * _delta * gravity_mulitplier
+	#添加移动滑动功能
 	move_and_slide()
 	#调用变更状态函数，由当前状态物理渲染决定返回的新状态
 	change_state( current_state.physics_process( _delta ))
