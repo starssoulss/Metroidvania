@@ -10,7 +10,7 @@ func init() -> void:
 #进入状态处理函数
 func enter() -> void:
 	#播放动画
-	
+	player.animation_player.play( "jump" )
 	#施加跳跃速度
 	player.velocity.y = -jump_velocity
 	

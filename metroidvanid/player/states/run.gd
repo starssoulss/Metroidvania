@@ -8,6 +8,7 @@ func init() -> void:
 
 #进入状态处理函数
 func enter() -> void:
+	player.animation_player.play( "run" )
 	pass
 	
 	
