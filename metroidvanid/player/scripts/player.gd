@@ -2,6 +2,14 @@ class_name Player extends CharacterBody2D
 
 const DEBUG_JUMP_INDICATOR = preload("res://player/debug_jump_indicator.tscn")
 
+#region ///就绪变量
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var collision_stand: CollisionShape2D = $CollisionStand
+@onready var collision_crouch: CollisionShape2D = $CollisionCrouch
+@onready var one_way_platform_raycast: RayCast2D = $OneWayPlatformRaycast
+#endregion
+
+
 
 
 #region ///导出变量
@@ -109,7 +117,7 @@ func update_direction() -> void:
 	
 	#根据输入获得新的方向
 	var x_axis = Input.get_axis("left", "right")
-	var y_axis = Input.get_axis("down", "up")
+	var y_axis = Input.get_axis("up", "down")
 	direction = Vector2(x_axis, y_axis)
 	
 	pass

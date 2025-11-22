@@ -10,6 +10,7 @@ var next_state : PlayState
 @onready var run: PlayStateRun = %Run
 @onready var jump: PlayStateJump = %Jump
 @onready var fall: PlayStateFall = %Fall
+@onready var crouch: PlayStateCrouch = %Crouch
 
 #endregion
 

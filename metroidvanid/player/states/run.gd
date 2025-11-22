@@ -29,6 +29,9 @@ func handle_input( _event : InputEvent ) -> PlayState:
 func process( _delta: float) -> PlayState:
 	if player.direction.x == 0:
 		return idle
+	elif player.direction.y > 0.5:
+		return crouch
+	
 	return next_state
 
 
@@ -38,6 +41,8 @@ func process( _delta: float) -> PlayState:
 func physics_process( _delta: float) -> PlayState:
 	#水平向量等于水平朝向*100
 	player.velocity.x = player.direction.x * player.move_speed
+	
+	#玩家不在地板上
 	if player.is_on_floor() == false:
 		return fall
 	return next_state

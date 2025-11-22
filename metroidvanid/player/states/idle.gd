@@ -25,8 +25,13 @@ func handle_input( _event : InputEvent ) -> PlayState:
 	
 #状态帧渲染处理函数    
 func process( _delta: float) -> PlayState:
+	
+	#玩家水平方向不等于0
 	if player.direction.x != 0:
 		return run
+	#玩家数值方向大于0.5
+	elif player.direction.y > 0.5:
+		return crouch
 	return next_state
 
 
