@@ -1,4 +1,5 @@
-class_name PlayStateRun extends PlayState
+class_name PlayStateFall extends PlayState
+
 
 
 
@@ -16,19 +17,13 @@ func exit() -> void:
 	pass
 	
 	
-	
 #状态处理输入函数,需要传入输入事件
 func handle_input( _event : InputEvent ) -> PlayState:
-	if _event.is_action_pressed( "jump" ):
-		return jump
 	return next_state
-
-
-
+	
 #状态帧渲染处理函数    
 func process( _delta: float) -> PlayState:
-	if player.direction.x == 0:
-		return idle
+
 	return next_state
 
 
@@ -36,8 +31,9 @@ func process( _delta: float) -> PlayState:
 
 #状态物理渲染处理函数
 func physics_process( _delta: float) -> PlayState:
-	#水平向量等于水平朝向*100
+	if player.is_on_floor():
+		#指示器，测试用
+		player.add_debug_indicator( Color.CRIMSON )
+		return idle
 	player.velocity.x = player.direction.x * player.move_speed
-	if player.is_on_floor() == false:
-		return fall
 	return next_state

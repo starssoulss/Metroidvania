@@ -8,6 +8,8 @@ var next_state : PlayState
 #使用唯一标识方便访问
 @onready var idle: PlayStateIdle = %Idle
 @onready var run: PlayStateRun = %Run
+@onready var jump: PlayStateJump = %Jump
+@onready var fall: PlayStateFall = %Fall
 #endregion
 
 #状态初始化函数

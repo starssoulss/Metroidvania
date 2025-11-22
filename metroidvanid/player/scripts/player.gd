@@ -1,6 +1,12 @@
 class_name Player extends CharacterBody2D
 
+const DEBUG_JUMP_INDICATOR = preload("res://player/debug_jump_indicator.tscn")
+
+
+
+#region ///导出变量
 @export var move_speed : float = 150
+#endregion
 
 #region ///状态机变量
 var states : Array[ PlayState ] #状态数组，初始获得所有，后续只保留当前及上一个状态
@@ -105,4 +111,13 @@ func update_direction() -> void:
 	var y_axis = Input.get_axis("down", "up")
 	direction = Vector2(x_axis, y_axis)
 	
+	pass
+	
+func add_debug_indicator( color :Color = Color.RED ) -> void:
+	var d : Node2D = DEBUG_JUMP_INDICATOR.instantiate()
+	get_tree().root.add_child( d )
+	d.global_position = global_position
+	d.modulate = color
+	await get_tree().create_timer( 3.0 ).timeout
+	d.queue_free()
 	pass

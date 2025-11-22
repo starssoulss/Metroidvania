@@ -19,6 +19,8 @@ func exit() -> void:
 	
 #状态处理输入函数,需要传入输入事件
 func handle_input( _event : InputEvent ) -> PlayState:
+	if _event.is_action_pressed( "jump" ):
+		return jump
 	return next_state
 	
 #状态帧渲染处理函数    
@@ -34,4 +36,6 @@ func process( _delta: float) -> PlayState:
 func physics_process( _delta: float) -> PlayState:
 	#水平向量=0
 	player.velocity.x = 0
+	if player.is_on_floor() == false:
+		return fall
 	return next_state
