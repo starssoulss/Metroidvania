@@ -14,6 +14,9 @@ func init() -> void:
 
 #进入状态处理函数  
 func enter() -> void:
+	#播放动画
+	player.animation_player.play( "jump" )
+	player.animation_player.pause()
 	player.gravity_mulitplier = fall_gravity_mulitplier
 	if player.previous_state == jump:
 		coyote_timer = 0
@@ -25,6 +28,9 @@ func enter() -> void:
 #退出状态处理函数
 func exit() -> void:
 	player.gravity_mulitplier = 1.0
+	
+	#退出时清楚缓冲计时
+	buffer_timer = 0
 	pass
 	
 	
@@ -41,6 +47,7 @@ func handle_input( event : InputEvent ) -> PlayState:
 func process( delta: float) -> PlayState:
 	coyote_timer -= delta
 	buffer_timer -= delta
+	set_jump_frame()
 	return next_state
 
 
@@ -51,8 +58,17 @@ func physics_process( _delta: float) -> PlayState:
 	if player.is_on_floor():
 		#指示器，测试用
 		player.add_debug_indicator( Color.CRIMSON )
-		if buffer_timer > 0:
+		
+		#断仍在缓冲时间且jump仍在按键
+		if buffer_timer > 0 and Input.is_action_pressed("jump"):
 			return jump
 		return idle
 	player.velocity.x = player.direction.x * player.move_speed
 	return next_state
+	
+	
+func set_jump_frame() -> void:
+	#重映射动画帧，下落点，最大下落速度，映射到0.5-1.0秒
+	var frame : float = remap( player.velocity.y, 0.0, player.max_fall_speed, 0.5, 1.0 )
+	player.animation_player.seek( frame, true )
+	pass

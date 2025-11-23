@@ -15,6 +15,7 @@ const DEBUG_JUMP_INDICATOR = preload("res://player/debug_jump_indicator.tscn")
 
 #region ///导出变量
 @export var move_speed : float = 150
+@export var max_fall_speed : float = 400
 #endregion
 
 #region ///状态机变量
@@ -53,6 +54,7 @@ func _process( _delta: float) -> void:
 func _physics_process( _delta: float) -> void:
 	#施加重力，计算重力在_delta时间内对于y分量的影响
 	velocity.y += gravity * _delta * gravity_mulitplier
+	velocity.y = clampf( velocity.y, -1000, max_fall_speed)
 	#添加移动滑动功能
 	move_and_slide()
 	#调用变更状态函数，由当前状态物理渲染决定返回的新状态

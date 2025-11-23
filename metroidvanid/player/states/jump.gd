@@ -11,12 +11,19 @@ func init() -> void:
 func enter() -> void:
 	#播放动画
 	player.animation_player.play( "jump" )
+	player.animation_player.pause()
 	#施加跳跃速度
 	player.velocity.y = -jump_velocity
 	
 	#指示器，测试用
 	player.add_debug_indicator( Color.CHARTREUSE )
-
+	
+	#跳跃缓冲可变跳跃高度失效修复替代方案，方案1在掉落状态物理进程处理
+	#if player.previous_state == fall and not Input.is_action_pressed( "jump" ):
+		#await get_tree().physics_frame
+		#player.velocity.y *= 0.5
+		#player.change_state( fall )
+		#pass
 	
 	pass
 	
@@ -40,6 +47,8 @@ func handle_input( event : InputEvent ) -> PlayState:
 	
 #状态帧渲染处理函数    
 func process( _delta: float) -> PlayState:
+	
+	set_jump_frame()
 
 	return next_state
 
@@ -57,3 +66,13 @@ func physics_process( _delta: float) -> PlayState:
 	
 	player.velocity.x = player.direction.x * player.move_speed
 	return next_state
+	
+	
+	
+	
+	
+func set_jump_frame() -> void:
+	#重映射动画帧，起跳速度，顶点，映射到0.0-0.5秒
+	var frame : float = remap( player.velocity.y, -jump_velocity, 0.0, 0.0, 0.5 )
+	player.animation_player.seek( frame, true )
+	pass
