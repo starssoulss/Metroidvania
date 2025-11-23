@@ -57,7 +57,7 @@ func process( delta: float) -> PlayState:
 func physics_process( _delta: float) -> PlayState:
 	if player.is_on_floor():
 		#指示器，测试用
-		player.add_debug_indicator( Color.CRIMSON )
+		#player.add_debug_indicator( Color.CRIMSON )
 		
 		#断仍在缓冲时间且jump仍在按键
 		if buffer_timer > 0 and Input.is_action_pressed("jump"):

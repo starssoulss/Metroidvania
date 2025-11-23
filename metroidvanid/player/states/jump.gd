@@ -16,7 +16,7 @@ func enter() -> void:
 	player.velocity.y = -jump_velocity
 	
 	#指示器，测试用
-	player.add_debug_indicator( Color.CHARTREUSE )
+	#player.add_debug_indicator( Color.CHARTREUSE )
 	
 	#跳跃缓冲可变跳跃高度失效修复替代方案，方案1在掉落状态物理进程处理
 	#if player.previous_state == fall and not Input.is_action_pressed( "jump" ):
@@ -32,7 +32,7 @@ func enter() -> void:
 func exit() -> void:
 	
 	#指示器，测试用
-	player.add_debug_indicator( Color.DARK_ORANGE )
+	#player.add_debug_indicator( Color.DARK_ORANGE )
 	
 	pass
 	

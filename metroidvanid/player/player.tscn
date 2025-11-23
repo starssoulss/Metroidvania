@@ -130,7 +130,6 @@ script = ExtResource("4_qjkh3")
 [node name="Fall" type="Node" parent="States"]
 unique_name_in_owner = true
 script = ExtResource("5_g6k8r")
-jump_buffer_time = 100.0
 
 [node name="Crouch" type="Node" parent="States"]
 unique_name_in_owner = true
